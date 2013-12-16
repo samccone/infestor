@@ -1,5 +1,5 @@
 {
-  "name": "injector",
+  "name": "injector_js",
   "version": "0.1.0",
   "description": "inject content into your dom - via connect middleware",
   "main": "index.js",

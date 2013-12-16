@@ -11,10 +11,15 @@ There are times when all you want to do is inject a JS file or custom markup int
 
 This is where injector comes in. Just specify the regex insertion point and content. Then you are good to go.
 
+
+### Installing
+`npm install injector_js`
+
 ### How to
 
 ```coffeescript
-  app.use injector
+  app.use require('injector_js')(
     content: "<h2> injected content! </h2>"
     injectAt: '/<\/html>/'
+  )
 ```
