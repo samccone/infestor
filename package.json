@@ -1,0 +1,31 @@
+{
+  "name": "injector",
+  "version": "0.1.0",
+  "description": "inject content into your dom - via connect middleware",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:samccone/injector.git"
+  },
+  "keywords": [
+    "connect",
+    "middleware"
+  ],
+  "author": "Sam Saccone",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/samccone/injector/issues"
+  },
+  "homepage": "https://github.com/samccone/injector",
+  "devDependencies": {
+    "mocha": "~1.15.1",
+    "connect": "~2.12.0",
+    "should": "~2.1.1",
+    "request": "~2.30.0"
+  },
+  "dependencies": {
+  }
+}
