@@ -24,7 +24,8 @@
     "mocha": "~1.15.1",
     "connect": "~2.12.0",
     "should": "~2.1.1",
-    "request": "~2.30.0"
+    "request": "~2.30.0",
+    "coffee-script": "latest"
   },
   "dependencies": {
   }
