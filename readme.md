@@ -1,6 +1,6 @@
 Injector
 ---------
-[![Build Status](https://travis-ci.org/[samccone]/[injector].png)](https://travis-ci.org/[samccone]/[injector])
+[![Build Status](https://travis-ci.org/samccone/injector.png)](https://travis-ci.org/samccone/injector)
 
 
 Inject content into your server responses
