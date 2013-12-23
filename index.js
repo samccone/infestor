@@ -19,8 +19,8 @@ module.exports = function(opts) {
 
       string = buffer.toString(encoding);
 
-      // if we have an html tag inject the content
-      if (~string.indexOf('<html>')) {
+      // if the string contains the inject at val
+      if (string.match(opts.injectAt)) {
         injectLocalScript(string, encoding, res);
         return injected = true;
       }
