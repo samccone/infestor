@@ -14,7 +14,7 @@ module.exports = function(opts) {
 
       // validate that the document is HTML short circut if not
       if (!((buffer != null) && ~((_ref = req.headers["accept"]) != null ? _ref.indexOf('html') : void 0))) {
-        return;
+        return res.write(buffer, encoding);
       }
 
       string = buffer.toString(encoding);
