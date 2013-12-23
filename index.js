@@ -1,6 +1,7 @@
 module.exports = function(opts) {
   opts = opts || {};
   opts.injectAt = opts.injectAt || /<\/html>/;
+  opts.acceptHeader = "html"
   opts.content = opts.content || "<h2>hello world</h2>";
 
   return function(req, res, next) {
@@ -12,8 +13,8 @@ module.exports = function(opts) {
       var string, _ref;
       res.write = w;
 
-      // validate that the document is HTML short circut if not
-      if (!((buffer != null) && ~((_ref = req.headers["accept"]) != null ? _ref.indexOf('html') : void 0))) {
+      // validate that the accept headers pass limiter condition
+      if (!((buffer != null) && ~((_ref = req.headers["accept"]) != null ? _ref.indexOf(opts.acceptHeader) : void 0))) {
         return res.write(buffer, encoding);
       }
 
