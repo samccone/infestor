@@ -21,5 +21,7 @@ This is where injector comes in. Just specify the regex insertion point and cont
   app.use require('injector_js')(
     content: "<h2> injected content! </h2>"
     injectAt: '/<\/html>/'
-  )
+  ).use(...)
 ```
+
+Make sure that you place the injector middleware before you serve your content. Or else injector will not work.
