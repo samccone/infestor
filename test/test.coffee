@@ -5,11 +5,11 @@ http     = require 'http'
 assert   = require 'assert'
 connect  = require 'connect'
 request  = require 'request'
-injector = require '../index.js'
+infestor = require '../index.js'
 
 startServer = (opts, cb) ->
   app     = connect()
-  app.use(injector(opts)).use(connect.static("#{__dirname}/public"))
+  app.use(infestor(opts)).use(connect.static("#{__dirname}/public"))
   server = http.createServer(app)
   server.listen port, cb
 

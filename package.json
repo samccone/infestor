@@ -1,14 +1,14 @@
 {
-  "name": "injector_js",
+  "name": "infestor",
   "version": "0.1.1",
-  "description": "inject content into your dom - via connect middleware",
+  "description": "infest content into requests - via connect middleware",
   "main": "index.js",
   "scripts": {
     "test": "mocha test"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:samccone/injector.git"
+    "url": "git@github.com:samccone/infestor.git"
   },
   "keywords": [
     "connect",
@@ -17,9 +17,9 @@
   "author": "Sam Saccone",
   "license": "BSD-2-Clause",
   "bugs": {
-    "url": "https://github.com/samccone/injector/issues"
+    "url": "https://github.com/samccone/infestor/issues"
   },
-  "homepage": "https://github.com/samccone/injector",
+  "homepage": "https://github.com/samccone/infestor",
   "devDependencies": {
     "mocha": "~1.15.1",
     "connect": "~2.12.0",
