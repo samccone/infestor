@@ -1,5 +1,6 @@
 Infestor
 ---------
+[![npm](https://badge.fury.io/js/infestor.png)](http://badge.fury.io/js/infestor)
 [![Build Status](https://travis-ci.org/samccone/infestor.png)](https://travis-ci.org/samccone/infestor)
 
 
