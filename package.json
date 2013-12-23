@@ -1,6 +1,6 @@
 {
   "name": "injector_js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "inject content into your dom - via connect middleware",
   "main": "index.js",
   "scripts": {
