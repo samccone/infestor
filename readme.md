@@ -26,3 +26,7 @@ This is where infestor comes in. Just specify the regex insertion point and cont
 ```
 
 Make sure that you place the infestor middleware before you serve your content. Or else infestor will not work.
+
+-----------
+
+![](http://media.moddb.com/images/mods/1/10/9329/63165.jpg)
