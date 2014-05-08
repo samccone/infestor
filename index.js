@@ -33,7 +33,7 @@ module.exports = function(opts) {
       res.end = e;
 
       // if we have injected update the content length of the response
-      if (injected) {
+      if (injected && !res.headersSent) {
         res.setHeader('content-length', Buffer.byteLength(res.data, encoding));
       }
       return res.end(res.data, encoding);
