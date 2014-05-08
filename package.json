@@ -1,6 +1,6 @@
 {
   "name": "infestor",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "infest content into requests - via connect middleware",
   "main": "index.js",
   "scripts": {
