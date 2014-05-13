@@ -21,13 +21,12 @@
   },
   "homepage": "https://github.com/samccone/infestor",
   "devDependencies": {
-    "mocha": "~1.15.1",
+    "mocha": "1.18.x",
     "connect": "3.x",
-    "should": "~2.1.1",
-    "request": "~2.30.0",
+    "should": "3.3.x",
+    "request": "2.34.x",
     "coffee-script": "latest",
-    "serve-static": "~1.1.0"
+    "serve-static": "1.1.x"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
