@@ -22,10 +22,11 @@
   "homepage": "https://github.com/samccone/infestor",
   "devDependencies": {
     "mocha": "~1.15.1",
-    "connect": "~2.12.0",
+    "connect": "3.x",
     "should": "~2.1.1",
     "request": "~2.30.0",
-    "coffee-script": "latest"
+    "coffee-script": "latest",
+    "serve-static": "~1.1.0"
   },
   "dependencies": {
   }

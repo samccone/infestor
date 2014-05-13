@@ -6,10 +6,11 @@ assert   = require 'assert'
 connect  = require 'connect'
 request  = require 'request'
 infestor = require '../index.js'
+serveStatic = require 'serve-static'
 
 startServer = (opts, cb) ->
   app     = connect()
-  app.use(infestor(opts)).use(connect.static("#{__dirname}/public"))
+  app.use(infestor(opts)).use(serveStatic("#{__dirname}/public"))
   server = http.createServer(app)
   server.listen port, cb
 
