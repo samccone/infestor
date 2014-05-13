@@ -25,7 +25,11 @@ This is where infestor comes in. Just specify the regex insertion point and cont
   ).use(...)
 ```
 
-Make sure that you place the infestor middleware before you serve your content. Or else infestor will not work.
+Make sure that you place the infestor middleware before you serve your content or else infestor will not work.
+
+### License & Contributing
+
+- Details on the license [can be found here](LICENSE.md)
 
 -----------
 
