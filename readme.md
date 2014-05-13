@@ -1,31 +1,47 @@
-Infestor
----------
-[![npm](https://badge.fury.io/js/infestor.png)](http://badge.fury.io/js/infestor)
-[![Build Status](https://travis-ci.org/samccone/infestor.png)](https://travis-ci.org/samccone/infestor)
+# Infestor
+
+[![npm](http://img.shields.io/npm/v/infestor.svg?style=flat)](https://badge.fury.io/js/infestor)
+[![tests](http://img.shields.io/travis/samccone/infestor/master.svg?style=flat)](https://travis-ci.org/samccone/infestor)
 
 
 Inject content into your server responses
 
 
-### Why?
+### Why should you care?
+
 There are times when all you want to do is inject a JS file or custom markup into the req res cycle without forcing the content generator to include custom markup on their side.
 
 This is where infestor comes in. Just specify the regex insertion point and content. Then you are good to go.
 
 
-### Installing
-`npm install infestor`
+### Installation
 
-### How to
+`npm install infestor --save`
 
-```coffeescript
-  app.use require('infestor')(
-    content: "<h2> injected content! </h2>"
-    injectAt: '/<\/html>/'
-  ).use(...)
+### Usage
+
+```js
+var http = require('http');
+    connect = require('connect'),
+    infestor = require('infestor'),
+    serveStatic  = require('serve-static');
+
+var app = connect()
+            .use(infestor({
+              content: "<h2> injected content! </h2>",
+              injectAt: '/<\/html>/'
+            })
+            .use(serveStatic(__dirname));
+
+var server = http.createServer(app).listen(1111)
 ```
 
-Make sure that you place the infestor middleware before you serve your content. Or else infestor will not work.
+Make sure that you place the infestor middleware before you serve your content or else infestor will not work.
+
+### License & Contributing
+
+- Details on the license [can be found here](LICENSE.md)
+- Details on running tests and contributing [can be found here](contributing.md)
 
 -----------
 
