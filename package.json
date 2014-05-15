@@ -4,7 +4,9 @@
   "description": "infest content into requests - via connect middleware",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha test",
+    "coverage": "istanbul cover _mocha --report html -- -R spec && open coverage/index.html",
+    "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
@@ -26,7 +28,10 @@
     "should": "3.3.x",
     "request": "2.34.x",
     "coffee-script": "latest",
-    "serve-static": "1.1.x"
+    "serve-static": "1.1.x",
+    "istanbul": "*"
   },
-  "dependencies": {}
+  "dependencies": {
+    "coveralls": "*"
+  }
 }
