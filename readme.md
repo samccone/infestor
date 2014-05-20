@@ -5,16 +5,13 @@
 [![coverage](http://img.shields.io/coveralls/samccone/infestor.svg?style=flat)](https://coveralls.io/r/samccone/infestor)
 [![dependencies](http://img.shields.io/gemnasium/samccone/infestor.svg?style=flat)](https://david-dm.org/samccone/infestor)
 
-
 Inject content into your server responses
-
 
 ### Why should you care?
 
 There are times when all you want to do is inject a JS file or custom markup into the req res cycle without forcing the content generator to include custom markup on their side.
 
 This is where infestor comes in. Just specify the regex insertion point and content. Then you are good to go.
-
 
 ### Installation
 
