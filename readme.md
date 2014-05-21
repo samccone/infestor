@@ -3,7 +3,6 @@
 [![npm](http://img.shields.io/npm/v/infestor.svg?style=flat)](https://badge.fury.io/js/infestor)
 [![tests](http://img.shields.io/travis/samccone/infestor/master.svg?style=flat)](https://travis-ci.org/samccone/infestor)
 [![coverage](http://img.shields.io/coveralls/samccone/infestor.svg?style=flat)](https://coveralls.io/r/samccone/infestor)
-[![dependencies](http://img.shields.io/gemnasium/samccone/infestor.svg?style=flat)](https://david-dm.org/samccone/infestor)
 
 Inject content into your server responses
 
