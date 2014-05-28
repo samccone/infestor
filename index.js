@@ -3,6 +3,7 @@ module.exports = function(opts) {
   opts.injectAt = opts.injectAt || /<\/html>/;
   opts.acceptHeader = "html"
   opts.content = opts.content || "<h2>hello world</h2>";
+  opts.injectContent = opts.injectContent || injectContent;
 
   return function(req, res, next) {
     var write     = res.write,
@@ -72,41 +73,63 @@ module.exports = function(opts) {
     }
 
     /**
-     * Intercepts res.end to inject content if applicable. First, we format and
-     * join any content that was written with res.write. If that's not present,
-     * we use the data argument passed to res.end. If this is a string, we
-     * continue on, if not, we simply return the request -- it has no content,
-     * so we won't be injecting anything. Assuming we do have some content,
-     * based on whether our matcher matches the response body string, we inject
-     * content at the preferred injection point. Finally, we call res.end with
-     * our newly (possibly) injected content.
+     * Intercepts res.end to inject content if applicable according
+     * to the implementation details of `injectContent`.
      *
-     * @param {String} data     [description]
-     * @param {String} encoding [description]
-     */
+     * @param {String} data     [the data arg passed to res.end]
+     * @param {String} encoding [the encoding that response will be returned with]
+    **/
     res.end = function(data, encoding) {
       res.end = end;
 
-      var str = content.map(function(b){
-        return b.toString(writeEncoding);
-      }).join('');
-
-      if (str === '') {
-        if (!data) { return res.end(data, encoding); }
-        str = data.toString(encoding)
-      }
-
-      if (opts.append) {
-        str += opts.content;
-      } else if (str.match(opts.injectAt)) {
-        str = str.replace(opts.injectAt, function(w) {
-          return opts.content + w;
-        });
-      }
-
-      return res.end(str, encoding);
+      return res.end(
+        opts.injectContent.apply(this, [content, writeEncoding].concat([].slice.call(arguments, 0))),
+        encoding
+      );
     };
 
     next();
+  }
+
+  /**
+   * The default implementation of inject content. This implementation should
+   * be fine for most people usin this tool, however it can be easily overidden
+   * via the `injectContent` option.
+   * The logic for this method is as follows:
+   * First, we format and
+   * join any content that was written with res.write. If that's not present,
+   * we use the data argument passed to res.end. If this is a string, we
+   * continue on, if not, we simply return data -- it has no content,
+   * so we won't be injecting anything. Assuming we do have some content,
+   * based on whether our matcher matches the response body string, we inject
+   * content at the preferred injection point. Finally, we call res.end with
+   * our newly (possibly) injected content.
+   * @param {String} content [the content of the response]
+   * @param {String} writeEncoding 
+   * @param {data}
+   * @param {encoding} 
+  **/
+  function injectContent(content, writeEncoding, data, encoding) {
+    var str = content.map(function(b) {
+      return b.toString(writeEncoding);
+    }).join('');
+
+    if (str === '') {
+      if (!data) {
+        return data;
+      }
+
+      str = data.toString(encoding)
+    }
+
+    if (opts.append) {
+      str += opts.content;
+    } else if (str.match(opts.injectAt)) {
+      str = str.replace(opts.injectAt, function(w) {
+        return opts.content + w;
+      });
+    }
+
+    return str;
   }
 };

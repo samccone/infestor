@@ -27,3 +27,9 @@ describe 'content injection', ->
       done(
         assert.equal(b.replace(/\s/g,""), '<html><body><h2>hi</h2></body></html>wow')
       )
+
+  it "should allow for overriding the default implementation of injectContent", (done) ->
+    getInjectedContent {injectContent: -> "NO"}, (b) ->
+      done(
+        assert.equal(b, 'NO')
+      )
