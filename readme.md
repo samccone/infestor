@@ -16,6 +16,11 @@ This is where infestor comes in. Just specify the regex insertion point and cont
 
 `npm install infestor --save`
 
+### Infestor Options
+* `content`: A string of content to be injected into the response
+* `injectAt`: The location where your content will be inject at.
+* `append`: A boolean representing if your custom content should just be appended to the response (overrides `injectAt`).
+
 ### Usage
 
 ```js
@@ -35,6 +40,7 @@ var server = http.createServer(app).listen(1111)
 ```
 
 Make sure that you place the infestor middleware before you serve your content or else infestor will not work.
+
 
 ### License & Contributing
 

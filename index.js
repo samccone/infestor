@@ -92,8 +92,10 @@ module.exports = function(opts) {
         if (!data) { return res.end(data, encoding); }
         str = data.toString(encoding)
       }
-      
-      if (str.match(opts.injectAt)) {
+
+      if (opts.append) {
+        str += opts.content;
+      } else if (str.match(opts.injectAt)) {
         str = str.replace(opts.injectAt, function(w) {
           return opts.content + w;
         });

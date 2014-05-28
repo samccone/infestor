@@ -32,3 +32,9 @@ describe 'injection', ->
       request.get "http://localhost:#{port}/index.html", (e, r, b)->
         assert.equal(b.replace(/\s/g,""), '<html>noo<body><h2>hi</h2></body></html>', "injects the default content")
         server.close => done()
+
+  it "should inject custom content at the start with append", (done) ->
+    startServer {content: "wow", append: true}, =>
+      request.get "http://localhost:#{port}/index.html", (e, r, b)->
+        assert.equal(b.replace(/\s/g,""), '<html><body><h2>hi</h2></body></html>wow', "injects content at the start")
+        server.close => done()
