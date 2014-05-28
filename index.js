@@ -16,7 +16,7 @@ module.exports = function(opts) {
      * Intercepts the write function and pushes any content to a store. Also
      * stores the encoding, assuming that nobody is crazy enough to push a bunch
      * of different content chunks all with different encodings.
-     * 
+     *
      * @param  {String|Buffer} chunk - a chunk of the response body
      * @param  {String} encoding - how to decode, if chunk is a buffer
      */
@@ -29,7 +29,7 @@ module.exports = function(opts) {
     /**
      * Intercepts the function to ensure we're using transfer-encoding chunked
      * rather than content length, as we'll be injecting content.
-     * 
+     *
      * @param {String} name - name of the header
      * @param {String} value - value of the header
      */
@@ -45,7 +45,7 @@ module.exports = function(opts) {
     /**
      * Intercepts this function to again ensure that transfer encoding chunked
      * is used instead of content-length.
-     * 
+     *
      * @param {Integer} statusCode - 3 digit http status code
      * @param {String} reasonPhrase - (optional) human-readable phrase
      * @param {Object} headers - header key-value pairs
@@ -64,7 +64,10 @@ module.exports = function(opts) {
 
       newHeaders['transfer-encoding'] = 'chunked';
 
-      if (headers) return res.writeHead(statusCode, reasonPhrase, newHeaders);
+      if (headers) {
+        return res.writeHead(statusCode, reasonPhrase, newHeaders);
+      }
+
       return res.writeHead(statusCode, newHeaders);
     }
 
@@ -77,7 +80,7 @@ module.exports = function(opts) {
      * based on whether our matcher matches the response body string, we inject
      * content at the preferred injection point. Finally, we call res.end with
      * our newly (possibly) injected content.
-     * 
+     *
      * @param {String} data     [description]
      * @param {String} encoding [description]
      */
