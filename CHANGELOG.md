@@ -1,3 +1,7 @@
+## v0.3.0
+* Adds the ability to append a response regardless of content.
+* Adds the ability to override `injectContent` via the option params.
+
 ## v0.2.3
 * Huge props to @jenius for basically rewriting the lib to basically be hardened against streaming res/req cycles as well as multi write res/req. :baby_symbol:
 
