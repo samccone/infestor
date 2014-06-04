@@ -1,5 +1,6 @@
 getInjectedContent  = require './_helpers'
 assert              = require 'assert'
+fs                  = require 'fs'
 
 describe 'content injection', ->
   afterEach (done) -> getInjectedContent.close done
@@ -33,3 +34,12 @@ describe 'content injection', ->
       done(
         assert.equal(b, 'NO')
       )
+
+  it "should handle large files", (done) ->
+    getInjectedContent {content: "noo", file: "large.txt"}, (b) ->
+      done(
+        assert.equal(b, fs.readFileSync("#{__dirname}/public/large.txt", "utf8"))
+      )
+      # done (
+      #   assert.equal(b.replace(/\s/g,""), '<html><body><h2>hi</h2></body>noo</html>')
+      # )
