@@ -1,11 +1,22 @@
 module.exports = function(opts) {
+  var minimatch = require("minimatch");
   opts = opts || {};
   opts.injectAt = opts.injectAt || /<\/html>/;
-  opts.acceptHeader = "html"
+  opts.files = opts.files || [ "**/*.html", "/" ];
   opts.content = opts.content || "<h2>hello world</h2>";
   opts.injectContent = opts.injectContent || injectContent;
 
   return function(req, res, next) {
+    var match = false;
+    for (var index = 0; index < opts.files.length; index++) {
+        var file = opts.files[index];
+        if (minimatch(req.url, file)) {
+            match = true;
+        }
+    }
+    if (!(match)) {
+        return next();
+    }
     var write     = res.write,
         end       = res.end,
         setHeader = res.setHeader,
@@ -81,9 +92,8 @@ module.exports = function(opts) {
     **/
     res.end = function(data, encoding) {
       res.end = end;
-
       return res.end(
-        opts.injectContent.apply(this, [content, writeEncoding].concat([].slice.call(arguments, 0))),
+        opts.injectContent.apply(this, [content, writeEncoding].concat([].slice.call(arguments, 0)), data, encoding),
         encoding
       );
     };
