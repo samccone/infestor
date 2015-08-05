@@ -33,3 +33,8 @@ describe 'content injection', ->
       done(
         assert.equal(b, 'NO')
       )
+  it "should inject only to matched files", (done) ->
+      getInjectedContent {files: [ "**/*.js", "**/*.css" ]}, (b) ->
+          done (
+              assert.equal(b.replace(/\s/g,""), '<html><body><h2>hi</h2></body></html>')
+          )
