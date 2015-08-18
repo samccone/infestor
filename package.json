@@ -33,6 +33,6 @@
     "coveralls": "*"
   },
   "dependencies": {
-    "minimatch": "2.0.*"
+    "minimatch": "2.*"
   }
 }

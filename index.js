@@ -1,5 +1,6 @@
+var minimatch = require("minimatch");
+
 module.exports = function(opts) {
-  var minimatch = require("minimatch");
   opts = opts || {};
   opts.injectAt = opts.injectAt || /<\/html>$/;
   opts.files = opts.files || [ "**/*.html", "/" ];
