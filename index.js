@@ -1,7 +1,7 @@
 module.exports = function(opts) {
   var minimatch = require("minimatch");
   opts = opts || {};
-  opts.injectAt = opts.injectAt || /<\/html>/;
+  opts.injectAt = opts.injectAt || /<\/html>$/;
   opts.files = opts.files || [ "**/*.html", "/" ];
   opts.content = opts.content || "<h2>hello world</h2>";
   opts.injectContent = opts.injectContent || injectContent;
@@ -72,9 +72,9 @@ module.exports = function(opts) {
    * content at the preferred injection point. Finally, we call res.end with
    * our newly (possibly) injected content.
    * @param {String} content [the content of the response]
-   * @param {String} writeEncoding 
+   * @param {String} writeEncoding
    * @param {data}
-   * @param {encoding} 
+   * @param {encoding}
   **/
   function injectContent(content, writeEncoding, data, encoding) {
     var str = content.map(function(b) {
