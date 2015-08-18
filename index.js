@@ -1,15 +1,25 @@
+var minimatch = require("minimatch");
+
 module.exports = function(opts) {
   opts = opts || {};
   opts.injectAt = opts.injectAt || /<\/html>$/;
-  opts.acceptHeader = "html"
+  opts.files = opts.files || [ "**/*.html", "/" ];
   opts.content = opts.content || "<h2>hello world</h2>";
   opts.injectContent = opts.injectContent || injectContent;
 
   return function(req, res, next) {
+    var match = false;
+    for (var index = 0; index < opts.files.length; index++) {
+        var file = opts.files[index];
+        if (minimatch(req.url, file)) {
+            match = true;
+        }
+    }
+    if (!(match)) {
+        return next();
+    }
     var write     = res.write,
         end       = res.end,
-        setHeader = res.setHeader,
-        writeHead = res.writeHead,
         content   = [],
         writeEncoding;
 
@@ -28,51 +38,6 @@ module.exports = function(opts) {
     };
 
     /**
-     * Intercepts the function to ensure we're using transfer-encoding chunked
-     * rather than content length, as we'll be injecting content.
-     *
-     * @param {String} name - name of the header
-     * @param {String} value - value of the header
-     */
-    res.setHeader = function(name, value){
-      res.setHeader = setHeader;
-      if (name === 'content-length' || name === 'Content-Length') {
-        name = 'transfer-encoding';
-        value = 'chunked';
-      }
-      return res.setHeader(name, value);
-    };
-
-    /**
-     * Intercepts this function to again ensure that transfer encoding chunked
-     * is used instead of content-length.
-     *
-     * @param {Integer} statusCode - 3 digit http status code
-     * @param {String} reasonPhrase - (optional) human-readable phrase
-     * @param {Object} headers - header key-value pairs
-     */
-    res.writeHead = function(statusCode, reasonPhrase, headers){
-      res.writeHead = writeHead;
-
-      var _headers = headers || reasonPhrase,
-          newHeaders = {};
-
-      for (var name in _headers) {
-        if (name !== 'content-length' || name !== 'Content-Length') {
-          newHeaders[name] = _headers[name];
-        }
-      }
-
-      newHeaders['transfer-encoding'] = 'chunked';
-
-      if (headers) {
-        return res.writeHead(statusCode, reasonPhrase, newHeaders);
-      }
-
-      return res.writeHead(statusCode, newHeaders);
-    }
-
-    /**
      * Intercepts res.end to inject content if applicable according
      * to the implementation details of `injectContent`.
      *
@@ -81,9 +46,12 @@ module.exports = function(opts) {
     **/
     res.end = function(data, encoding) {
       res.end = end;
-
+      var injectedData = opts.injectContent.apply(this, [content, writeEncoding].concat([].slice.call(arguments, 0)), data, encoding);
+      if (!res.headersSent) {
+        res.setHeader('content-length', Buffer.byteLength(injectedData, encoding));
+      }
       return res.end(
-        opts.injectContent.apply(this, [content, writeEncoding].concat([].slice.call(arguments, 0))),
+        injectedData,
         encoding
       );
     };
